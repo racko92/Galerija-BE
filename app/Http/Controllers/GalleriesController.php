@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Gallery;
 
+
 class GalleriesController extends Controller
 {
     /**
@@ -14,7 +15,9 @@ class GalleriesController extends Controller
      */
     public function index()
     {
-        return Gallery::all();
+        $galleries = Gallery::with('pictures')->get();
+
+        return $galleries;
     }
 
     /**
@@ -46,7 +49,7 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        //
+        return Gallery::findOrFail($id);
     }
 
     /**
