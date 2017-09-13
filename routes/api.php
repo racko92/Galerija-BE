@@ -22,3 +22,4 @@ Route::middleware('jwt')->resource('galleries', 'GalleriesController');
 
 Route::post('login', 'Auth\LoginController@authenticate');
 
+Route::post('register', 'Auth\RegisterController@create');
