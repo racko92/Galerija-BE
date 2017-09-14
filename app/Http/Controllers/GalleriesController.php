@@ -15,9 +15,8 @@ class GalleriesController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::with('pictures')->get();
+        return Gallery::with('pictures')->paginate(10);
 
-        return $galleries;
     }
 
     /**
@@ -49,7 +48,7 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        return Gallery::findOrFail($id);
+        return Gallery::with(['pictures', 'comments', 'user'])->findOrFail($id);
     }
 
     /**

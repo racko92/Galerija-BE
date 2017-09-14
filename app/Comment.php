@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class Comment extends Model
 {
     protected $fillable = [
-        'imageUrl',
-        'gallery_id',
+        'body',
+        'gallery_id'
     ];
 
     public function gallery()
