@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 
 class CommentsController extends Controller
 {
@@ -34,7 +35,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        return Comment::create([
+            'body' => $data['body'],
+            'gallery_id' => $data['gallery_id'],
+            'user_id' => $data['user_id']
+        ])->load('user');
     }
 
     /**
@@ -45,7 +52,7 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        return Comment::with('user')->findOrFail($id);
+        return Comment::findOrFail($id);
     }
 
     /**
