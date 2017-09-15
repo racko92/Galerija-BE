@@ -19,7 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::middleware('jwt')->resource('galleries', 'GalleriesController');
+Route::middleware('jwt')->get('search/{term}', 'GalleriesController@search');
 
 Route::post('login', 'Auth\LoginController@authenticate');
 
 Route::post('register', 'Auth\RegisterController@create');
+
+Route::middleware('jwt')->get('my-galleries/{id}', 'UsersController@show');

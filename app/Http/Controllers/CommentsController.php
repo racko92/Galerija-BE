@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Gallery;
-use Carbon\Carbon;
 
-
-class GalleriesController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,7 @@ class GalleriesController extends Controller
      */
     public function index()
     {
-        return Gallery::with(['pictures', 'user'])->paginate(10);
-
+        //
     }
 
     /**
@@ -49,13 +45,9 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        return Gallery::with(['pictures', 'comments.user'])->findOrFail($id);
+        return Comment::with('user')->findOrFail($id);
     }
 
-    public function search($term)
-    {
-        return Gallery::where('name', 'like', '%' . $term . '%')->with(['pictures', 'user'])->paginate(10);
-    }
     /**
      * Show the form for editing the specified resource.
      *
