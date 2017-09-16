@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gallery;
+use App\Picture;
 use Carbon\Carbon;
 
 
@@ -38,7 +39,32 @@ class GalleriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $id = Gallery::insertGetId([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'user_id' => $data['user_id'],
+        ]);
+
+        foreach($data['pictures'] as $imageUrl){
+            Picture::create([
+                'imageUrl' => $imageUrl,
+                'gallery_id' => $id
+            ]);
+        }
+
+        return Gallery::with('pictures')->findOrFail($id);
+//        foreach( $request->get('pictures') as $image){
+//            $gallery->pictures()->store([
+//                'imageUrl' => $image,
+//                'gallery_id' => Gallery::where([
+//                    'name' => request('name'),
+//                    'user_id' => request('uder_id')
+//                ]),
+//            ]);
+//        }
+
     }
 
     /**

@@ -22,7 +22,7 @@ Route::middleware('jwt')->resource('galleries', 'GalleriesController');
 Route::middleware('jwt')->get('search/{term}', 'GalleriesController@search');
 Route::middleware('jwt')->resource('comments', 'CommentsController');
 Route::middleware('jwt')->get('my-galleries/{id}', 'UsersController@show');
-
+Route::middleware('jwt')->post('create', 'GalleriesController@store');
 
 Route::post('login', 'Auth\LoginController@authenticate');
 

@@ -45,8 +45,6 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-//        $galleries = \App\Gallery::with('pictures')->get();
-//        return User::with('$galleries')->findOrFail($id);
         return User::with('galleries.pictures')->findOrFail($id);
     }
 
